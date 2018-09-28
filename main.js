@@ -1,20 +1,38 @@
 !function(){
+    let duration = 50
+    $('.buttonList').on('click','button',function(e){
+        let $button = $(e.currentTarget)
+        let speed = $button.attr('data-speed')
+        $button.addClass('active')
+            .siblings('.active').removeClass('active')
+        switch(speed){
+            case 'slow':
+                duration = 80
+                break
+            case 'normal':
+                duration = 50
+                break
+            case 'fast':
+                duration = 10
+                break
+        }
+    })
     function writeCode(prefix,code,fn){
         let domCode = document.querySelector('#code')
         let styleTag = document.querySelector('#styleTag')
         domCode.innerHTML = prefix || ''
         let n = 0
-        let timer = setInterval(()=>{
+        let timer = setTimeout(function run(){
             n = n+1
             domCode.innerHTML = Prism.highlight(prefix + code.substring(0,n), Prism.languages.css)
             domCode.scrollTop = domCode.scrollHeight
             styleTag.innerHTML = prefix + code.substring(0,n)
-            if(n >= code.length){
-                window.clearInterval(timer)
-                fn && fn.call()
+            if(n < code.length){
+                timer = setTimeout(run,duration)
             }
-        },10)
+        },duration)
     }
+    
     let code = `
 /* 先给 Pikachu 加上点背景 */
 .preview{
@@ -149,9 +167,4 @@
 /* Done~，完成啦 */
 `
     writeCode('',code)
-    $('.buttonList').on('click','button',function(e){
-        let $button = $(e.currentTarget)
-        $button.addClass('active')
-            .siblings().removeClass('active')
-    })
 }.call()
