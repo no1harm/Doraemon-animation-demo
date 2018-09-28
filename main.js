@@ -35,6 +35,9 @@
     
     let code = `
 /* 先给 Pikachu 加上点背景 */
+* {
+    transition: all 1s;
+}
 .preview{
     display:flex;
     height: 100%;
