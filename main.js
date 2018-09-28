@@ -149,4 +149,9 @@
 /* Done~，完成啦 */
 `
     writeCode('',code)
+    $('.buttonList').on('click','button',function(e){
+        let $button = $(e.currentTarget)
+        $button.addClass('active')
+            .siblings().removeClass('active')
+    })
 }.call()
