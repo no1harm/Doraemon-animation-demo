@@ -151,7 +151,7 @@
     border-radius: 200px/2000px;
     overflow:hidden;
 }
-/* 添加点儿高亮 */
+/* 添加点儿高光 */
 .lowerLip::after{
     content:'';
     position: absolute;
